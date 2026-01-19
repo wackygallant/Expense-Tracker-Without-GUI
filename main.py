@@ -8,7 +8,7 @@ while True:
             3. Verify Expenses Entry
             4. Verify Income Entry
             5. Save Updates to CSV 
-            6. Get Updates From CSV         
+            6. Get Updates From CSV        
             0. Exit
         """)
 
@@ -71,6 +71,7 @@ while True:
             pass
 
         case "0":
+            print("Operation Ended.")
             break
 
         case _:
