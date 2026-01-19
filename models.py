@@ -51,18 +51,26 @@ class ListParser:
     
     @staticmethod
     def save_to_csv():
+        
         if expense_list:
+            file_path_exists = os.path.exists('expense.csv')
             # Open the CSV file in append mode
             with open('expense.csv', mode='a', newline='') as file:
                 writer = csv.DictWriter(file, fieldnames=headers)
+                if not file_path_exists:
+                    writer.writeheader()
                 writer.writerows(expense_list)
             print("List appended to the CSV file successfully.")
         else:
             print("No expenses data to enter")
 
         if income_list:
+            file_path_exists = os.path.exists('income.csv')
+            # Ope the CSV file in append mode
             with open('income.csv', mode='a', newline='') as file:
                 writer = csv.DictWriter(file, fieldnames=headers)
+                if not file_path_exists:
+                    writer.writeheader()
                 writer.writerows(income_list)
             print("List appended to the CSV file successfully.")
         else:

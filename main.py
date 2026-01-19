@@ -5,11 +5,11 @@ while True:
     print("""Options:
             1. Add Expenses
             2. Add Income
-            3. View Balance
-            4. View Expense List
-            5. View Income List
-            6. Save Updates            
-            0. Cancel
+            3. Verify Expenses Entry
+            4. Verify Income Entry
+            5. Save Updates to CSV 
+            6. Get Updates From CSV         
+            0. Exit
         """)
 
     user_response = input("Please Select an option: ")
@@ -49,9 +49,6 @@ while True:
             income_entry.add_income()
 
         case "3":
-            pass
-
-        case "4":
             records = ListParser.show_expense_records()
             if not records:
                 print("There are no expenses recorded.")
@@ -59,7 +56,7 @@ while True:
                 for record in records:
                     print(record)
 
-        case "5":
+        case "4":
             records = ListParser.show_income_records()
             if not records:
                 print("There are no incomes recorded.")
@@ -67,8 +64,11 @@ while True:
                 for record in records:
                     print(record)
         
-        case "6":
+        case "5":
             ListParser.save_to_csv()
+
+        case "6":
+            pass
 
         case "0":
             break
