@@ -15,40 +15,24 @@ class BaseEntry:
         self.description = description
         self.amount = amount
 
-class Income(BaseEntry):
-    def __init__(self, category: str, description: str, amount: float):
-        super().__init__(category, description, amount)  # inheritance
-        
-    def add_income(self):
-        income_list.append({
+    def to_dict(self):
+        return {
             "date": self.date,
             "category": self.category,
             "description": self.description,
             "amount": self.amount
-        })
+        }
 
 class Expense(BaseEntry):
-    def __init__(self, category: str, description: str, amount: float):
-        super().__init__(category, description, amount)  # inheritance
-
     def add_expense(self):
-        expense_list.append({
-            "date": self.date,
-            "category": self.category,
-            "description": self.description,
-            "amount": self.amount
-        })
+        expense_list.append(self.to_dict())
 
-class ListParser:
-    @staticmethod
-    def show_income_records():
-        return income_list
-    
-    @staticmethod
-    def show_expense_records():
-        return expense_list
-    
-    @staticmethod
+class Income(BaseEntry):
+    def add_income(self):
+        income_list.append(self.to_dict())
+
+class EntryRepository:
+
     def save_to_csv():
         data_pair = [(expense_list, 'expense.csv'), (income_list, 'income.csv')]
 
@@ -67,17 +51,13 @@ class ListParser:
             
             data.clear()
 
-            # if income_list:
-            #     file_path_exists = os.path.exists('income.csv')
-            #     # Ope the CSV file in append mode
-            #     with open('income.csv', mode='a', newline='') as file:
-            #         writer = csv.DictWriter(file, fieldnames=headers)
-            #         if not file_path_exists:
-            #             writer.writeheader()
-            #         writer.writerows(income_list)
-            #     print("List appended to the CSV file successfully.")
-            # else:
-            #     print("No income data to enter.")
-
+    @staticmethod
+    def show_income_records():
+        return income_list
+    
+    @staticmethod
+    def show_expense_records():
+        return expense_list
+    
 
 
