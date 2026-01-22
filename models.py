@@ -1,10 +1,14 @@
 from datetime import date
 
+from repository import EntryRepository
+
 class AmountError(Exception):
     pass
 
 class BaseEntry:
     def __init__(self, category : str, description : str, amount : float):
+        id_field_data = EntryRepository()
+        self.id = id_field_data.generate_next_id('re')
         self.date = date.today().isoformat()
         self.category = category
         self.description = description
@@ -12,16 +16,9 @@ class BaseEntry:
 
     def to_dict(self):
         return {
+            "id" : self.id,
             "date": self.date,
             "category": self.category,
             "description": self.description,
             "amount": self.amount
         }
-
-# Just passes the income instances to the repository
-class Income(BaseEntry):
-    pass
-
-# Just passes the expenses instances to the repository
-class Expense(BaseEntry):
-    pass
