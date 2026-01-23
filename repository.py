@@ -7,11 +7,12 @@ class EntryRepository:
 
     # Saves to the CSV file
     def save_to_csv(self, data : dict):
+        FIELDNAMES = ["id", "date", "category", "description", "amount", "record_type"]
         file_path_exists = os.path.exists(self.file_path)
         write_header = not file_path_exists or os.stat(self.file_path).st_size == 0
         # Opens the CSV file in append mode
         with open(self.file_path, mode='a', newline='', encoding='utf-8') as f:
-            writer = csv.DictWriter(f, fieldnames=data.keys())
+            writer = csv.DictWriter(f, fieldnames=FIELDNAMES)
             if write_header:
                 writer.writeheader()
             writer.writerow(data)
