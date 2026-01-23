@@ -24,8 +24,8 @@ class EntryRepository:
             return starting_id
 
         # Opens the CSV file in read mode
-        with open(self.file_path, mode='r', newline='') as f:
-            reader = list(csv.DictReader(f))
+        with open(self.file_path, mode='r', newline='') as file:
+            reader = list(csv.DictReader(file))
 
             if not reader:
                 return starting_id
@@ -43,10 +43,16 @@ class EntryRepository:
         return matches
 
     def get_total_income(self):
-        pass
+        filter_key, filter_value = "record_type" , "income"
+        amount_list = []
+        for amount in self.get_data_from_csv(filter_key, filter_value): amount_list.append(float(amount['amount']))
+        return sum(amount_list)
 
     def get_total_expense(self):
-        pass
+        filter_key, filter_value = "record_type" , "expense"
+        amount_list = []
+        for amount in self.get_data_from_csv(filter_key, filter_value): amount_list.append(float(amount['amount']))
+        return sum(amount_list)
 
-    def get_savings(self):
-        pass
+    def check_balance(self):
+        return self.get_total_income() - self.get_total_expense()

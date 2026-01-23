@@ -19,20 +19,19 @@ def take_user_entry():
 def choose_record_type():
     # Prompts user to choose which record to add, returns income or expense or None
     while True:
-        choice = input("1. Income\n2. Expense\n0. Cancel\n==> ")
+        choice = input("\n1. Income\n2. Expense\n0. Cancel\n==> ")
         match choice:
             case "1": return "income"
             case "2": return "expense"
             case "0": return None
-            case _: print("\n\nInvalid Option!!!\n\n")
+            case _: print("\nInvalid Option!!!\n")
 
 def choose_filter_type():
     # Prompts user for the filter values and returns filter_key and filter_value
     while True:
-        choice = input("1. By Record Type\n2. By Category\n0. Cancel\n==> ")
+        choice = input("\n1. By Record Type\n2. By Category\n0. Cancel\n==> ")
         match choice:
             case "1": return ("record_type", input("Enter filter value: ").lower())
             case "2": return ("category", input("Enter filter value: ").lower())
             case "0": return None
-            case _: print("\n\nInvalid Option!!!\n\n")
-            
+            case _: print("\nInvalid Option!!!\n")

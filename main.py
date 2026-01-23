@@ -6,7 +6,7 @@ repo = EntryRepository()
 
 # Showing options while asking user for the input
 while True:
-    menu_choice = input("Menu Options:\n1. Add Record\n2. Get Records\n3. Get Remaining Balance(Savings)\n0. Exit\n==>")
+    menu_choice = input("\nMenu Options:\n1. Add Record\n2. Get Records\n3. Summary\n0. Exit\n==>")
 
     match menu_choice:
         case "1":
@@ -20,7 +20,7 @@ while True:
             entry = BaseEntry(category, description, amount, record_type)
             # Calling to add the dictionary to the temporary list created in repo
             repo.save_to_csv(entry.to_dict())
-            print("\n\nData appended to the csv file!!!\n\n")
+            print("\nData appended to the csv file!!!\n")
 
         case "2":
             # Gets the filter values and returns the matching values from the csv
@@ -30,14 +30,33 @@ while True:
                 for data in data_list:
                     print(data)
             else:
-                print("\n\nNo Data Found\n\n")
+                print("\nNo Data Found\n")
 
         case "3":
-            pass
+            while True:
+                choice = input("\n1. Get Total Income\n2. Get Total Expenses\n3. Get Balance\n0. Go back\n==> ")
+                match choice:
+                    case "1": 
+                        print(f"\Your total income till date is Rs.{repo.get_total_income()}\n")
+                        break
+                    case "2":
+                        print(f"\nYour total expense till date is Rs.{repo.get_total_expense()}\n")
+                        break
+                    case "3":
+                        if repo.get_total_income() > repo.get_total_expense():
+                            print(f"\nYou have Rs.{repo.check_balance()} left.\n")
+                        else:
+                            print(f"\nYou are Rs.{repo.check_balance()} on debt.\n")
+                        break     
+                    case "0": 
+                        break                    
+                    case _: 
+                        print("\nInvalid Option!!!\n")
+                        continue
 
         case "0":
-            print("\n\nOperation Ended.\n\n")
+            print("\nOperation Ended.\n")
             break
 
         case _:
-            print("\n\nFunction Not Available!!!\n\n")
+            print("\nFunction Not Available!!!\n")
