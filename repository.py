@@ -9,6 +9,7 @@ class EntryRepository:
         if data:
             file_path_exists = os.path.exists(self.file_path)
             write_header = not file_path_exists or os.stat(self.file_path).st_size == 0
+            breakpoint()
             # Open the CSV file in append mode
             with open(self.file_path, mode='a', newline='', encoding='utf-8') as f:
                 writer = csv.DictWriter(f, fieldnames=data.keys())
