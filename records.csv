@@ -6,3 +6,4 @@ id,date,category,description,amount,record_type
 5,2026-01-23,rent,house rent,10000.0,expense
 6,2026-01-23,clothing,shirt,5000.0,expense
 7,2026-01-23,food,food,2000.0,expense
+8,2026-01-23,income,salary5,20000.0,income
