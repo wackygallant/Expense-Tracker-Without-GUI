@@ -1,26 +1,19 @@
-from models import AmountError, BaseEntry
+from models import BaseEntry
 from repository import EntryRepository
-from utils import take_user_entry, choose_record_type
+from utils import choose_filter_type, take_user_entry, choose_record_type
 
 repo = EntryRepository()    
 
 # Showing options while asking user for the input
 while True:
-    menu_choice = input(("""Menu Options:
-            1. Add a record
-            2. Get Records
-            3. 
-            4.         
-            0. Exit
-            
-            ==> """))
+    menu_choice = input("Menu Options:\n1. Add a record\n2. Get Records\n0. Exit\n==>")
 
     match menu_choice:
         case "1":
             record_type = choose_record_type()
             
             if record_type == None:
-                    break
+                break
 
             category, description, amount = take_user_entry()
             # Structuring the data before sending it to save it as dictionary
@@ -30,7 +23,9 @@ while True:
             repo.save_to_csv(entry.to_dict())
 
         case "2":
-            repo.get_data_from_csv()
+            filter_key, filter_value = choose_filter_type()
+            breakpoint() 
+            repo.get_data_from_csv(filter_key, filter_value)
 
         case "0":
             print("Operation Ended.")
@@ -38,4 +33,3 @@ while True:
 
         case _:
             print("Function Not Available")
-

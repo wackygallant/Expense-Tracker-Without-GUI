@@ -21,11 +21,18 @@ class EntryRepository:
             print(f"No data to append in '{self.file_path}'.")
 
     
-    def get_data_from_csv(self):
-        with open(self.file_path, mode='r') as f:
-            reader = csv.DictReader(f)
-            for record in reader:
-                print(record)
+    def get_data_from_csv(self, filter_key, filter_value):
+        with open(self.file_path, newline="", encoding="utf-8") as file:
+            reader = csv.DictReader(file)
+            breakpoint()
+            matches = [row for row in reader if row[filter_key] == filter_value]
+
+        # Read filtered data
+        if matches:
+            for row in matches:
+                print(row)
+            else:
+                print("No Data Found")
 
 
     def generate_next_id(self, starting_id: int = 1) -> int:
@@ -41,4 +48,5 @@ class EntryRepository:
 
             last_id = int(reader[-1]["id"])
             return last_id + 1
+
 
